@@ -1,9 +1,16 @@
 .content {
     font-family: 'Roboto', sans-serif;
+}
+.content > * {
     margin: 44px 8.5vw 0;
+}
+.content > .main {
+    margin: 0;
+    padding: 0 8.5vw;
 }
 .header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
 }
@@ -19,12 +26,13 @@
     padding-left: 35px;
 }
 .input-address {
-    width: 690px;
+    flex: 0.8;
     background-image: url(resources/images/home-search-icon.svg);
 }
 .input-search {
     width: 306px;
     background-image: url(resources/images/search.svg);
+    margin-left: auto;
 }
 .search::placeholder {
     color: #BFBFBF;
@@ -54,6 +62,13 @@
     border: 1px solid #D9D9D9;
     border-radius: 2px;
 }
+.button-to-cart {
+    padding-left: 16px;
+    padding-right: 36px;
+    background-image: url(resources/images/cart-icon-white.svg);
+    background-repeat: no-repeat;
+    background-position: center right 16px;
+}
 .promo {
     box-shadow: 0px 7px 12px rgba(158, 158, 163, 0.1);
     background: #fff1b8 url(resources/images/promo-image.png) no-repeat top right -250px / 1100px;
@@ -76,10 +91,12 @@
     color: #302c34;
     max-width: 538px;
 }
+.main {
+    background: linear-gradient(180deg, rgba(245, 245, 245, 0) 1.04%, #f5f5f5 100%);
+}
 .section-heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 44px;
 }
 .section-title {
@@ -89,6 +106,7 @@
     line-height: 42px;
     color: #000;
     margin: 0;
+    margin-right: 30px;
 }
 .cards {
     display: flex;
@@ -97,13 +115,16 @@
     flex-wrap: wrap;
 }
 .card {
-    width: 32%;
-    height: 380px;
+    flex-basis: 31%;
     background: #fff;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
     border-radius: 7px;
     overflow: hidden;
     margin-bottom: 30px;
+    text-decoration: none;
+}
+.card:visited {
+    color: #000;
 }
 .card-image {
     width: 100%;
@@ -128,6 +149,14 @@
     font-size: 24px;
     line-height: 32px;
 }
+.card-title-reg {
+    font-weight: 400;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+.ingredients {
+    height: 42px;
+}
 .card-tag {
     font-style: normal;
     font-weight: bold;
@@ -141,6 +170,18 @@
 .card-info {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+.card-buttons {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+}
+.card-price-bold {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 32px;
+    margin-left: 30px;
 }
 .rating {
     margin-right: 26px;
@@ -157,6 +198,17 @@
 .price {
     margin-right: 10px;
 }
+.ingredients {
+    color: #8c8c8c;
+    font-size: 18px;
+    line-height: 21px;
+}
+.category {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
+}
 .price::after {
     content: "";
     width: 5px;
@@ -166,4 +218,176 @@
     vertical-align: middle;
     border-radius: 50%;
     margin-left: 10px;
+}
+.footer {
+    padding: 60px 0;
+    margin-top: 0;
+}
+.footer-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer-nav {
+    margin-left: 35px;
+    margin-right: auto;
+}
+.footer-link {
+    display: inline-block;
+    color: #595959;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    text-decoration: none;
+}
+.footer-link:not(:last-child) {
+    margin-right: 15px;
+}
+.social-links {
+    display: flex;
+    align-items: center;
+}
+.social-link:not(:last-child) {
+    margin-right: 21px;
+}
+
+@media (max-width: 1374px) {
+    .promo {
+        background-size: 980px;
+        background-position: top -50px right -310px;
+    }
+    .rating {
+        margin-right: 15px;
+    }
+    .category,.price {
+        font-size: 14px;
+    }
+    .promo {
+        padding: 50px;
+    }
+    .promo-title {
+        font-size: 24px;
+        line-height: 1.4;
+    }
+    .promo-text {
+        font-size: 18px;
+        max-width: 400px;
+        margin-top: 0;
+    }
+    .card {
+        flex-basis: 49%;
+    }
+}
+@media (max-width: 992px) {
+    .container {
+        max-width: 750px;
+    }
+    .footer-link {
+        font-size: 16px;
+    }
+    .promo {
+        background-size: 830px;
+        background-position: top -50px right -300px;
+        padding: 25px;
+    }
+    .card-title {
+        font-size: 19px;
+    }
+    .ingredients {
+        font-size: 14px;
+    }
+    .footer-logo {
+        order: 0;
+    }
+    .footer-nav {
+        margin-bottom: 20px;
+    }
+    .footer-link:not(:last-child) {
+        margin-right: 7px;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        max-width: 560px;
+    }
+    .header {
+        flex-wrap: wrap;
+    }
+    .input-address {
+        min-width: 90%;
+        margin-top: 15px;
+        order: 5;
+        flex: 1;
+    }
+    .input-search {
+        margin-left: 0;
+    }
+    .promo {
+        background-image: none;
+        margin-bottom: 30px;
+    }
+    .input-search {
+        width: 100%;
+    }
+    .card {
+        flex-basis: 100%;
+    }
+    .card-info {
+        flex-wrap: wrap;
+    }
+    .card .rating {
+        flex-basis: 100%;
+    }
+    .footer-nav {
+        width: 100px;
+        text-align: center;
+        margin: auto;
+    }
+}
+@media (max-width: 578px) {
+    .promo-title {
+        margin-bottom: 10px;
+    }
+    .section-title {
+        font-size: 20px;
+    }
+    .card {
+        flex-basis: 100%;
+    }
+    .footer {
+        padding: 30px 0;
+    }
+    .footer-nav {
+        margin-left: 0;
+        margin-right: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 480px) {
+    .button-text {
+        display: none;
+    }
+    .button-icon {
+        margin: 0;
+    }
+    .button {
+        min-height: 40px;
+    }
+    .promo {
+        padding: 20px;
+    }
+    .footer-block {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-logo {
+        margin-bottom: 20px;
+    }
+    .footer-nav {
+        margin-bottom: 20px;
+        text-align: center;
+    }
 }
