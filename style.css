@@ -1,4 +1,4 @@
-.content {
+.content, .modal {
     font-family: 'Roboto', sans-serif;
 }
 .content > * {

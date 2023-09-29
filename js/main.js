@@ -4,7 +4,7 @@ const close = document.querySelector(".close");
 
 cartButton.addEventListener('click', toggleModal);
 
-cartButton.addEventListener('click', toggleModal);
+close.addEventListener('click', toggleModal);
 
 function toggleModal(){
     modal.classList.toggle("is-open");
