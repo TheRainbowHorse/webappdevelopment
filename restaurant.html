@@ -16,12 +16,16 @@
                     <img class="logo-image" src="resources/images/logo-full.svg">
                 </a>
                 <input class="input input-address" placeholder="Адрес доставки">
-                <div>
-                    <button class="sign-in">
+                <div class="buttons">
+                    <span class="user-name promo-title"></span>
+                    <button class="sign-in auth-button">
                         Войти
                     </button>
                     <button class="cart" id="cart-button">
                         Корзина
+                    </button>
+                    <button class="sign-in logout-button">
+                        Выйти
                     </button>
                 </div>
             </header>
@@ -165,7 +169,7 @@
             <div class="modal-dialog">
                 <div class="modal-header">
                     <h3 class="modal-title">Корзина</h3>
-                    <button class="close">&times;</button>
+                    <button class="close close-cart">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="food-row">
@@ -221,6 +225,31 @@
                         <button class="modal-button cart">Отмена</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal modal-auth">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h3 class="modal-title">Авторизация</h3>
+                    <button class="close close-auth">&times;</button>
+                </div>
+                <form action="" id="login-form">
+                    <div class="modal-body">
+                        <div class="row">
+                            <label>Логин</label>
+                            <input type="text" id="login-input">
+                        </div>
+                        <div class="row">
+                            <label>Пароль</label>
+                            <input type="password" id="password-input">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="footer-buttons">
+                            <button class="modal-button sign-in">Войти</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <script src="js/wow.min.js"></script>
