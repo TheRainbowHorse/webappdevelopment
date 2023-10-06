@@ -62,6 +62,11 @@
     border: 1px solid #D9D9D9;
     border-radius: 2px;
 }
+.logout-button {
+    display: none;
+    background-image: none;
+    padding-left: 16px;
+}
 .button-to-cart {
     padding-left: 16px;
     padding-right: 36px;
@@ -350,6 +355,45 @@
     border-radius: 5px;
     color: #fff;
     padding: 15px 20px;
+}
+.user-name {
+    margin-right: 10px;
+}
+.modal-auth .modal-header {
+    margin-bottom: -20px;
+    padding-top: 20px;
+}
+.modal-auth .close {
+    margin-top: -80px;
+    margin-right: -30px;
+}
+.modal-auth .modal-title {
+    background-color: #fff;
+    margin-top: -20px;
+    margin-left: 15px;
+}
+.modal-auth .modal-body {
+    border: 1px solid #000;
+    border-radius: 2px;
+    text-align: center;
+    padding: 50px;
+    margin-bottom: 20px;
+}
+.modal-auth .modal-dialog{
+    width: auto;
+}
+.modal-auth .row {
+    display: flex;
+    justify-content: space-around;
+}
+.modal-auth input {
+    margin-left: 30px;
+}
+.modal-auth .row:not(:first-child) {
+    margin-top: 30px;
+}
+.modal-auth .modal-footer {
+    justify-content: end;
 }
 
 @media (max-width: 1374px) {
