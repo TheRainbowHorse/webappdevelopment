@@ -17,13 +17,20 @@ const modalAuth = document.querySelector('.modal-auth');
 const closeAuth = document.querySelector('.close-auth');
 const loginForm = document.querySelector('#login-form');
 const loginInput = document.querySelector('#login-input');
+const passwordInput = document.querySelector('#password-input');
 const userName = document.querySelector('.user-name');
 const logoutButton = document.querySelector('.logout-button');
 
 let login = localStorage.getItem('gloDelivery');
 
 function toggleModalAuth(){
+    loginForm.reset();
     modalAuth.classList.toggle('is-open');
+    if (modalAuth.classList.contains("is-open")){
+        disableScroll();
+    } else {
+        enableScroll();
+    }
 }
 
 function authorized(){
@@ -54,11 +61,15 @@ function notAuthorized(){
     function logIn(event) {
         event.preventDefault();
         login = loginInput.value;
+        password = passwordInput.value;
 
         localStorage.setItem('gloDelivery', login);
 
-        if (login) toggleModalAuth();
-        else{
+        if (login && password) {
+            toggleModalAuth();
+        }
+        else if (!login)
+        {
             console.log('animate');
             loginInput.style.border = '2px solid rgb(255, 65, 65)';
             loginInput.classList.add('animate__animated', 'animate__shakeX');
@@ -67,10 +78,19 @@ function notAuthorized(){
                 loginInput.style.border = '';
             });
         }
+        else
+        {
+            console.log('animate');
+            passwordInput.style.border = '2px solid rgb(255, 65, 65)';
+            passwordInput.classList.add('animate__animated', 'animate__shakeX');
+            passwordInput.addEventListener('animationend', () => {
+                passwordInput.classList.remove('animate__animated', 'animate__shakeX');
+                passwordInput.style.border = '';
+            });
+        }
         authButton.removeEventListener('click', toggleModalAuth);
         closeAuth.removeEventListener('click', toggleModalAuth);
         loginForm.removeEventListener('submit', logIn);
-        loginForm.reset();
 
         checkAuth();
     }
@@ -78,10 +98,15 @@ function notAuthorized(){
     authButton.addEventListener('click', toggleModalAuth);
     closeAuth.addEventListener('click', toggleModalAuth);
     loginForm.addEventListener('submit', logIn)
+    modalAuth.addEventListener('click', function (event) {
+        if (event.target.classList.contains('is-open')){
+            toggleModalAuth();
+        }
+    })
 }
 
 function checkAuth() {
-    if (login) {
+    if (login && password) {
         authorized();
     } else {
         notAuthorized();
@@ -89,3 +114,22 @@ function checkAuth() {
 }
 
 checkAuth();
+
+window.disableScroll = function () {
+    const widthScroll = window.innerWidth - document.body.offsetWidth;
+    document.body.dbscrollY = window.scrollY;
+    document.body.style.cssText = `
+        position: fixed;
+        overflow: hidden;
+        height: 100vh;
+        top: ${-window.scrollY}px;
+        left: 0;
+        width 100%;
+        padding-right: ${widthScroll}px;
+    `;
+}
+
+window.enableScroll = function () {
+    document.body.style.cssText = ``;
+    window.scroll({top: document.body.dbscrollY})
+}
