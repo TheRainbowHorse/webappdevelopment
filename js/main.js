@@ -1,9 +1,8 @@
+'use strict';
+
 const cartButton = document.querySelector('#cart-button');
 const modal = document.querySelector('.modal');
 const closeCartButton = document.querySelector('.close-cart');
-
-cartButton.addEventListener('click', toggleModal);
-closeCartButton.addEventListener('click', toggleModal);
 
 function toggleModal(){
     modal.classList.toggle('is-open');
@@ -20,8 +19,15 @@ const loginInput = document.querySelector('#login-input');
 const passwordInput = document.querySelector('#password-input');
 const userName = document.querySelector('.user-name');
 const logoutButton = document.querySelector('.logout-button');
+const cardsRestaurant = document.querySelector('.cards-restaurant');
+const containerPromo = document.querySelector('.container-promo');
+const restaurants = document.querySelector('.restaurants');
+const menu = document.querySelector('.menu');
+const logo = document.querySelector('.logo');
+const cardsMenu = document.querySelector('.cards-menu');
 
 let login = localStorage.getItem('gloDelivery');
+let password = localStorage.getItem('gloDeliveryPass');
 
 function toggleModalAuth(){
     loginForm.reset();
@@ -64,6 +70,7 @@ function notAuthorized(){
         password = passwordInput.value;
 
         localStorage.setItem('gloDelivery', login);
+        localStorage.setItem('gloDeliveryPass', password);
 
         if (login && password) {
             toggleModalAuth();
@@ -113,8 +120,6 @@ function checkAuth() {
     }
 }
 
-checkAuth();
-
 window.disableScroll = function () {
     const widthScroll = window.innerWidth - document.body.offsetWidth;
     document.body.dbscrollY = window.scrollY;
@@ -133,3 +138,92 @@ window.enableScroll = function () {
     document.body.style.cssText = ``;
     window.scroll({top: document.body.dbscrollY})
 }
+
+function createCardRestaurant() {
+    const card = `
+        <a class="card card-restaurant wow animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+            <img src="resources/images/пицца_плюс.jpg" alt="image" class="card-image">
+            <div class="card-text">
+                <div class="card-heading">
+                    <h3 class="card-title">Пицца-плюс</h3>
+                    <span class="card-tag">50 мин</span>
+                </div>
+                <div class="card-info">
+                    <div class="rating">
+                        <img src="resources/images/rating.svg" alt="rating" class="rating-star">
+                        4.5
+                    </div>
+                    <div class="price">От 900 $</div>
+                    <div class="category">Пицца</div>
+                </div>
+            </div>
+        </a>
+    `;
+
+    cardsRestaurant.insertAdjacentHTML('beforeend', card);
+}
+
+function createCardGood() {
+    const card = document.createElement('div');
+    card.className = 'card wow animate__animated animate__fadeInUp';
+    card.setAttribute('data-wow-delay', '0.2s');
+
+    card.insertAdjacentHTML('beforeend', `
+            <img src="resources/images/ролл_угорь_стандарт.png" alt="image" class="card-image">
+            <div class="card-text">
+                <div class="card-heading">
+                    <h3 class="card-title card-title-reg">Ролл угорь стандарт</h3>
+                </div>
+                <div class="card-info">
+                    <div class="ingredients">Рис, угорь, соус унаги, кунжут, водоросли нори.</div>
+                </div>
+                <div class="card-buttons">
+                    <button class="sign-in button-to-cart">В корзину</button>
+                    <strong class="card-price-bold">250 $</strong>
+                </div>
+            </div>
+    `);
+
+    cardsMenu.insertAdjacentElement('beforeend', card);
+}
+
+function openGoods(event) {
+    const target = event.target;
+    const restaurant = target.closest('.card-restaurant');
+
+    if (login){
+        if (restaurant){
+            cardsMenu.textContent = '';
+            containerPromo.classList.add('hide');
+            restaurants.classList.add('hide');
+            menu.classList.remove('hide');
+
+            createCardGood();
+            createCardGood();
+            createCardGood();
+        }
+    }
+    else {
+        toggleModalAuth();
+    }
+}
+
+
+cartButton.addEventListener('click', toggleModal);
+
+closeCartButton.addEventListener('click', toggleModal);
+
+cardsRestaurant.addEventListener('click', openGoods);
+
+logo.addEventListener('click', function() {
+    containerPromo.classList.remove('hide');
+    restaurants.classList.remove('hide');
+    menu.classList.add('hide');
+});
+
+
+checkAuth();
+
+createCardRestaurant();
+createCardRestaurant();
+createCardRestaurant();

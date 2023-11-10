@@ -1,3 +1,6 @@
+.hide {
+    display: none;
+}
 .content, .modal {
     font-family: 'Roboto', sans-serif;
 }
