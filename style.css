@@ -79,10 +79,24 @@
 }
 .promo {
     box-shadow: 0px 7px 12px rgba(158, 158, 163, 0.1);
-    background: #fff1b8 url(resources/images/promo-image.png) no-repeat top right -250px / 1100px;
     border-radius: 10px;
-    padding: 68px 70px;
+    padding: 68px 0;
     margin-bottom: 56px;
+}
+.pizza {
+    background: #fff1b8 url(resources/images/pizza.png) no-repeat top right -250px / 1100px;
+}
+.kebab {
+    background: #fff1b8 url(resources/images/kebab.png) no-repeat top right -250px / 1100px;
+}
+.sushi {
+    background: #fff1b8 url(resources/images/sushi.png) no-repeat top right -250px / 1100px;
+}
+.vegetables {
+    background: #fff1b8 url(resources/images/vegetables.png) no-repeat top right -250px / 1100px;
+}
+.promo-content {
+    padding: 0 70px;
 }
 .promo-title {
     font-style: normal;
@@ -411,7 +425,10 @@
         font-size: 14px;
     }
     .promo {
-        padding: 50px;
+        padding: 50px 0;
+    }
+    .promo-content {
+        padding: 0 50px;
     }
     .promo-title {
         font-size: 24px;
@@ -436,7 +453,10 @@
     .promo {
         background-size: 830px;
         background-position: top -50px right -300px;
-        padding: 25px;
+        padding: 25px 0;
+    }
+    .promo-content {
+        padding: 0 25px;
     }
     .card-title {
         font-size: 19px;
@@ -472,7 +492,10 @@
     }
     .promo {
         background-image: none;
-        margin-bottom: 30px;
+        margin-bottom: 30px 0;
+    }
+    .promo-content {
+        padding: 0 30px;
     }
     .input-search {
         width: 100%;
@@ -523,7 +546,10 @@
         min-height: 40px;
     }
     .promo {
-        padding: 20px;
+        padding: 20px 0;
+    }
+    .promo-content {
+        padding: 0 20px;
     }
     .footer-block {
         flex-wrap: wrap;
