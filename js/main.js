@@ -152,22 +152,19 @@ window.enableScroll = function () {
 }
 
 function createGoodsTitle({ image, kitchen, name, price, stars, products, time_of_delivery: timeOfDelivery }) {
-    const card = document.createElement('div');
-    card.className = 'restaurant-short section-heading';
-
-    card.insertAdjacentHTML('beforeend', `
-            <h2 class="section-title">${name}</h2>
-            <div class="card-info">
-                <div class="rating">
-                    <img src="img/icon/rating.svg" alt="rating" class="rating-star">
-                    ${stars}
-                </div>
-                <div class="price">От ${price} $</div>
-                <div class="category">${kitchen}</div>
+    const card = `
+        <h2 class="section-title">${name}</h2>
+        <div class="card-info">
+            <div class="rating">
+                <img src="img/icon/rating.svg" alt="rating" class="rating-star">
+                ${stars}
             </div>
-    `);
+            <div class="price">От ${price} $</div>
+            <div class="category">${kitchen}</div>
+        </div>
+    `;
 
-    menu.insertAdjacentElement('afterbegin', card);
+    restaurantShort.insertAdjacentHTML('beforeend', card);
 }
 
 function createCardRestaurant({ image, kitchen, name, price, stars, products, time_of_delivery: timeOfDelivery }) {
@@ -226,11 +223,12 @@ function openGoods(event) {
     if (login){
         if (restaurant){
             cardsMenu.textContent = '';
+            restaurantShort.textContent = '';
             containerPromo.classList.add('hide');
             restaurants.classList.add('hide');
             menu.classList.remove('hide');
             getData(`db/partners.json`).then(function(data){
-                createGoodsTitle(data.find((element) => element.name == restaurant.lastElementChild.firstElementChild.firstElementChild.textContent));
+                createGoodsTitle(data.find((element) => element.name == restaurant.querySelector('.card-title').textContent));
             });
             getData(`db/${restaurant.dataset.products}`).then(function(data){
                 data.forEach(createCardGood);
