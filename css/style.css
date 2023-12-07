@@ -1,5 +1,5 @@
 .hide {
-    display: none;
+    display: none !important;
 }
 .content, .modal {
     font-family: 'Roboto', sans-serif;
@@ -282,6 +282,7 @@
     height: 100%;
     background: rgba(0,0,0,0.4);
     display: none;
+    z-index: 3;
 }
 .is-open {
     display: flex;

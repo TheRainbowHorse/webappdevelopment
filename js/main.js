@@ -26,6 +26,8 @@ const menu = document.querySelector('.menu');
 const logo = document.querySelector('.logo');
 const cardsMenu = document.querySelector('.cards-menu');
 const restaurantShort = document.querySelector('.restaurant-short');
+const inputSearch = document.querySelector('.input-search');
+const restaurantTitle = document.querySelector('.section-title');
 
 let login = localStorage.getItem('gloDelivery');
 let password = localStorage.getItem('gloDeliveryPass');
@@ -136,7 +138,6 @@ window.disableScroll = function () {
     const widthScroll = window.innerWidth - document.body.offsetWidth;
     document.body.dbscrollY = window.scrollY;
     document.body.style.cssText = `
-        position: fixed;
         overflow: hidden;
         height: 100vh;
         top: ${-window.scrollY}px;
@@ -240,24 +241,66 @@ function openGoods(event) {
     }
 }
 
-getData('db/partners.json').then(function(data){
-    data.forEach(createCardRestaurant);
-});
+function init() {
+    getData('db/partners.json').then(function(data){
+        data.forEach(createCardRestaurant);
+    });
 
-cartButton.addEventListener('click', toggleModal);
+    cartButton.addEventListener('click', toggleModal);
 
-closeCartButton.addEventListener('click', toggleModal);
+    closeCartButton.addEventListener('click', toggleModal);
 
-cardsRestaurant.addEventListener('click', openGoods);
+    cardsRestaurant.addEventListener('click', openGoods);
 
-logo.addEventListener('click', function() {
-    containerPromo.classList.remove('hide');
-    restaurants.classList.remove('hide');
-    menu.classList.add('hide');
-});
+    logo.addEventListener('click', function() {
+        containerPromo.classList.remove('hide');
+        restaurants.classList.remove('hide');
+        menu.classList.add('hide');
+    });
 
+    checkAuth();
 
-checkAuth();
+    inputSearch.addEventListener('keypress', function(event) {
+        if (event.charCode === 13){
+            const value = event.target.value.trim();
+            if (!value){
+                event.target.style.outlineColor = 'red';
+                event.target.style.borderColor = 'red';
+                event.target.value = '';
+                setTimeout(function() {
+                    event.target.style.outlineColor = '';
+                    event.target.style.borderColor = '';
+                }, 1500);
+                return;
+            }
+            getData('db/partners.json').then(function (data) {
+                return data.map(function(partner) {
+                    return partner.products;
+                })
+            })
+            .then(function (linksProduct) {
+                cardsMenu.textContent = '';
+                restaurantShort.textContent = '';
+                restaurantShort.insertAdjacentHTML('afterbegin', '<div class="section-title">Резульатат поиска</div>');
+                linksProduct.forEach(function(link) {
+                    getData(`db/${link}`)
+                    .then(function (data) {
+                        const resultSearch = data.filter(function (item) {
+                            const name = item.name.toLowerCase();
+                            return name.includes(value.toLowerCase());
+                        })
+                        containerPromo.classList.add('hide');
+                        restaurants.classList.add('hide');
+                        menu.classList.remove('hide');
+                        resultSearch.forEach(createCardGood);
+                    })
+                })
+            })
+        }
+    });
+}
+
+init();
 
 //Slider
 
