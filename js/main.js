@@ -35,7 +35,7 @@ const clearCart = document.querySelector('.clear-cart');
 let login = localStorage.getItem('gloDelivery');
 let password = localStorage.getItem('gloDeliveryPass');
 
-const cart = [];
+const cart = localStorage.getItem('gloDeliveryCart') ? JSON.parse(localStorage.getItem('gloDeliveryCart')) : [];
 
 const getData = async function(url) {
     const response = await fetch(url);
@@ -270,6 +270,7 @@ function addToCart(event){
                 count: 1
             });
         }
+        localStorage.setItem('gloDeliveryCart', JSON.stringify(cart));
     }
 }
 
@@ -293,6 +294,7 @@ function renderCart() {
         return result + (parseFloat(item.cost) * item.count);
     }, 0);
     modalPrice.textContent = totalPrice + ' $';
+    localStorage.setItem('gloDeliveryCart', JSON.stringify(cart));
 }
 
 function changeCount(event) {
