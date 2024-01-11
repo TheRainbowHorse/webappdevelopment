@@ -1,4 +1,6 @@
 'use strict';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const cartButton = document.querySelector('#cart-button');
 const modal = document.querySelector('.modal');
@@ -31,11 +33,30 @@ const restaurantTitle = document.querySelector('.section-title');
 const cartBody = document.querySelector('.cart-body');
 const modalPrice = document.querySelector('.modal-pricetag');
 const clearCart = document.querySelector('.clear-cart');
+const placeOrderButton = document.querySelector('#place-order');
 
 let login = localStorage.getItem('gloDelivery');
 let password = localStorage.getItem('gloDeliveryPass');
 
 const cart = localStorage.getItem('gloDeliveryCart') ? JSON.parse(localStorage.getItem('gloDeliveryCart')) : [];
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD4GjfKs6VCigvbaNTaZHAPdSa_uxyh3tc",
+    authDomain: "deliveryfood-f354b.firebaseapp.com",
+    databaseURL: "https://deliveryfood-f354b-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "deliveryfood-f354b",
+    storageBucket: "deliveryfood-f354b.appspot.com",
+    messagingSenderId: "1053530759829",
+    appId: "1:1053530759829:web:fea158c61a65afd610b19c"
+};
+const app = initializeApp(firebaseConfig);
+
+placeOrderButton.addEventListener('click', ()=>{
+    const db = getDatabase();
+    const order = {user: login , dishes: cart};
+    push(ref(db, 'orders'), order);
+    toggleModal();
+});
 
 const getData = async function(url) {
     const response = await fetch(url);

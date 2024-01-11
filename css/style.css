@@ -1,3 +1,11 @@
+.swiper-slide {
+    display: none;
+    /* visibility: hidden; */
+}
+.swiper-slide-active {
+    display: block;
+    /* visibility: visible; */
+}
 .hide {
     display: none !important;
 }
